@@ -3,10 +3,10 @@ import pyautogui
 
 food_list = ["598200010", "598200026", "598200027", "598200042", "598200045", "598200056", "598200057",
              "598200163", "598200219", "598200576", "598200645", "598200683", "598200889", "598200992", "598201038",
-             "598201073", "598201157", "598201158", "598201159", "598201177", "598201183", "598201287", "598201349",
+             "598201073", "598201157", "598201158", "598201159", "598201177", "598201183", "598201287", "598201349",c
              "598201351", "598201355", "598201356", "598201357", "598201358", "598201359", "598201423", "598201433",
              "598201452", "598201454", "598201455", "598201463", "598201485", "598201511", "598201513", "598201516",
-             "598201517", "598201526", "598201528", "598201529", "798201055", "798201072", "798201072", "798201326", "000000000","*00000000", "^00000000"]
+             "598201517", "598201526", "598201528", "598201529", "798201055", "798201072", "798201072", "798201326", "000000000","*00000000", "^0000000+"]
 
 word_buffer = []
 read = []
@@ -20,14 +20,18 @@ def combine_func():
     order_list = []
     combined.pop(0)
     combined.pop(-1)
-    combined.append("^00000000")
+    combined.append("^0000000+")
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('backspace') #deleting everyhting
     print("combined list: " + str(combined))
     for order_article in combined:
-            pyautogui.typewrite(order_article) #write everything from the left 
-            print(order_article) #here is the problem
-            pyautogui.press('enter')
+            if order_article != "^0000000+":
+                pyautogui.typewrite(order_article) #write everything from the left 
+                print(order_article)
+                pyautogui.press('enter')
+            elif order_article == "^0000000+":
+                pyautogui.typewrite(order_article) #write everything from the left 
+                print(order_article)
 
     pyautogui.press('backspace', presses=10)
     
@@ -79,10 +83,6 @@ def on_key_press(event):
             print("last buffer detected")
             combine_func()
     
-
-
-
-
         check_word_buffer()
 
 
