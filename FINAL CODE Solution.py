@@ -1,12 +1,16 @@
 import keyboard
 import pyautogui
 
-food_list = ["598200010", "598200026", "598200027", "598200042", "598200045", "598200056", "598200057",
-             "598200163", "598200219", "598200576", "598200645", "598200683", "598200889", "598200992", "598201038",
-             "598201073", "598201157", "598201158", "598201159", "598201177", "598201183", "598201287", "598201349",c
-             "598201351", "598201355", "598201356", "598201357", "598201358", "598201359", "598201423", "598201433",
-             "598201452", "598201454", "598201455", "598201463", "598201485", "598201511", "598201513", "598201516",
-             "598201517", "598201526", "598201528", "598201529", "798201055", "798201072", "798201072", "798201326", "000000000","*00000000", "^0000000+"]
+with open('food json.txt', 'r') as file:
+    contents = file.read()
+
+dictionary = eval(contents)
+
+food_articles = list(dictionary.keys())
+
+food_list = food_articles + ["000000000","*00000000", "^0000000+"]
+
+print(food_list)
 
 word_buffer = []
 read = []
@@ -42,7 +46,7 @@ def combine_func():
         
 def on_key_press(event):
 
-    if "^00000000" in combined:
+    if "^0000000+" in combined:
         combined.clear()
     
     if combined == ["*00000000"]:
@@ -66,13 +70,13 @@ def on_key_press(event):
         print(reversed_output)
 
         if reversed_output in food_list:
-            if "^00000000" in combined:
+            if "^0000000+" in combined:
                 combined.clear()
             print("food in list")
             full_length = len(word_buffer)
             minus_cut = full_length - 9
             word_buffer_new = word_buffer[minus_cut:] #taking the last 9 letters
-            combined_word_new = ''.join(str(element) for element in word_buffer_new) #combining the last 9 lettes and making it into a string (order)
+            combined_word_new = ''.join(str(element) for element in word_buffer_new) #combining the last 9 lettes and making it into a string 
             print(combined_word_new)
             word_buffer.clear()
             word_buffer.extend(combined_word_new)
